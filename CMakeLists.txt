@@ -14,6 +14,8 @@ enable_testing()
 
 add_subdirectory(test)
 
+# include_directories("include")
+
 file(GLOB SOURCES "src/*.cpp")
 file(GLOB HEADERS "include/*.hpp")
 

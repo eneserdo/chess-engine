@@ -16,4 +16,6 @@ string moveToString(Move move);
 
 string getFEN(Board& board);
 
+uint64_t BIT(int x);
+
 #endif // UTILS_HPP

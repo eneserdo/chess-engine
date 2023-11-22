@@ -8,8 +8,6 @@
 
 using namespace std;
 
-// #define BIT(x) (1ULL << x)
-
 enum Piece
 {
     PAWN,
@@ -32,26 +30,29 @@ enum Piece
 // 1   0  1  2  3  4  5  6  7
 
 
-vector<uint8_t> getLocationList(uint64_t bitboard);
+uint8_t getLocation(uint64_t bitBoard);
+vector<uint8_t> getLocationList(uint64_t bitBoard);
 
 
 /// @brief Represents the bit boards for each piece type, 
-/// keeps track of castling rights, en passant, half move clock, and full move number. 
+/// keeps track of castling rights, en passant, half move clock, and full move number.
+/// Implementation must be minimal since there will be thousands of instances of this struct. 
 struct Board
 {
-    uint64_t whitePawns, whiteKnights, whiteBishops, whiteRooks, whiteQueens, whiteKing;
-    uint64_t blackPawns, blackKnights, blackBishops, blackRooks, blackQueens, blackKing;
-
-    uint64_t whitePieces, blackPieces;
+    // Bit boards for each piece type
+    // 0 - white, 1 - black
+    uint64_t pawns[2], knights[2], bishops[2], rooks[2], queens[2], king[2];
+    uint64_t allPieces[2];
     
-    bool rookMoved[2][2];
-    bool kingMoved[2];
-    bool castling[2][2];
-    bool enPassant; 
-    int halfMoveClock, fullMoveNumber;
+    // Castling rights
+    bool isRookMoved[2][2] = {{false, false}, {false, false}};
+    bool isKingMoved[2] = {false, false};
 
-    Board();
+    // TODO: En passant
+    // bool enPassant; 
 };
+
+void initializeBoard(Board& board);
 
 /// @brief Represents a move, with the starting and ending location, and the piece type
 /// @param from (uint8_t) The starting location of the piece
@@ -66,6 +67,7 @@ struct Move
     bool operator==(const Move& other) const;
 };
 
+vector<uint64_t> getSeparatedBitBoards(uint64_t bitBoard);
 
 
 

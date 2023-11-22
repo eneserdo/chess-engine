@@ -33,3 +33,9 @@ string getFEN(Board& board)
     string fen = "";
     return fen;
 }
+
+
+uint64_t BIT(int x)
+{
+    return 1ULL << x;
+}
